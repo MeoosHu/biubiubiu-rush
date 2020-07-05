@@ -1,6 +1,6 @@
 ### 1、Spring  MVC的原理？
 
-![img](https://img-blog.csdn.net/20180522162744760?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3lhbndlaWhwdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+![image-20200706012704900](C:\Users\Huff\AppData\Roaming\Typora\typora-user-images\image-20200706012704900.png)
 
 （1）客户端（浏览器）发送请求，直接请求到DispatcherServlet。
 
