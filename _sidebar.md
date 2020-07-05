@@ -4,7 +4,6 @@
   * [Java基础](./docs/1-1-Java基础.md)
   * [Java多线程并发](./docs/1-2-Java多线程并发.md)
   * [Java虚拟机](./docs/1-3-Java虚拟机.md)
-  * [常用第三方工具包](./docs/)
 
 * 操作系统
 
@@ -26,6 +25,7 @@
   * [Spring Shiro](./docs/)
   
 * 分析设计
+
   * [设计模式](./docs/1-4-设计模式.md)
 
 * 算法
@@ -57,8 +57,15 @@
 	* [Mybatis](./docs/5-1-Mybatis.md)
   * 网络框架
 	* [Netty](./docs/)
+	
+* 常用编辑器
 
+  * [IDEA快捷键](./docs/)
+  * [VS Code](./docs/)
   
+* [常用第三方工具包](./docs/)
+  * [Git](./docs/)
+  * [maven](./docs/)
   
 * 数据库
   * 关系型数据库

@@ -31,7 +31,7 @@ ArrayList和LinkedList的异同
 
 3. 对Null Key和Null Value的支持：HashMap中，null可以作为键，这样的键只有一个，可以有一个或多个键对应的值为null。但是在Hashtable中put进键值只要有一个null，直接抛出NullPointerException
 
-4. 初试容量大小和每次扩充容量大小的不同：（1）创建时如果不指定容量初始值，Hashtable默认的初试大小为11，之后每次扩充，容量变为原来的2n+1.HashMap默认的初始化大小为16。之后每次扩容，容量变为原来的2倍。（2）创建时如果给定了容量初始值，那么Hashtable会直接使用你给定的大小，而HashMap会将其扩充为2的幂次方大小（HashMap中的tableSizeFor（）方法保证），也就是说HashMap总是使用2的幂作为哈希表的大小（**为什么使用2的幂次方作为哈希表的大小？**）
+4. 初试容量大小和每次扩充容量大小的不同：（1）创建时如果不指定容量初始值，Hashtable默认的初试大小为11，之后每次扩充，容量变为原来的2n+1.HashMap默认的初始化大小为16。之后每次扩容，容量变为原来的2倍。（2）创建时如果给定了容量初始值，那么Hashtable会直接使用你给定的大小，而HashMap会将其扩充为2的幂次方大小（HashMap中的tableSizeFor（）方法保证），也就是说HashMap总是使用2的幂作为哈希表的大小；以2的幂次方是为了进行hashcode计算时尽量让键对应的值在数组 均匀分布
 
 5. 底层数据结构：JDK1.8以后的HashMap在解决哈希冲突时有了较大的变化，当链表长度大于阈值（默认为8）时，将链表转化为红黑树，以减少搜索时间。Hashtable没有这样的机制。
 
@@ -43,22 +43,77 @@ ArrayList和LinkedList的异同
 
 ​		java反射：JAVA反射机制是在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意一个方法和属性；这种动态获取的信息以及动态调用对象的方法的功能称为java语言的反射机制。
 
+​		静态代理：相当于在编译期就确定了被代理的类是哪一个；一般被代理类必须要实现某个接口，代理类也需要实现该接口，并且调用被代理类的方法
+
+​		动态代理：在代码运行期间加载被代理的类，如Spring AOP机制或RPC框架；通过实现InvocationHandler接口，重写invoke方法，可以通过java反射的机制生成代理类，在通过代理类调用被代理类的方法时，最终是在invoke中执行
+
 ### 4.String、StringBuilder、StringBuffer有什么区别？String为什么是不可变的？
 
-​		StringBuffer线程安全
+​		String：不可变对象，由final修饰
+
+​		StringBuilder：线程不安全，字符串变量
+
+​		StringBuffer：线程安全，其方法上大多加了synchronized关键字
 
 ### 5.ConcurrentHashMap是如何保证线程安全的？
 
+​		锁分离思想；CAS锁；volatile
+
 ### 6.在自定义一个线程时它的参数列表是怎样的？
+
+![image-20200706001234874](C:\Users\Huff\AppData\Roaming\Typora\typora-user-images\image-20200706001234874.png)
+
+- corePoolSize 线程池核心线程大小
+- maximumPoolSize 线程池最大线程数量
+- keepAliveTime 空闲线程存活时间
+- unit 空间线程存活时间单位
+- workQueue 工作队列
+- threadFactory 线程工厂
+- handler 拒绝策略
 
 ### 7.JDK对应的数组跟链表的线程安全的类库？
 
-### 8.Collections的排序算法？----比较器等
+![img](https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1533816262839&di=a51c0622a7953f68ee7875dda2430a7c&imgtype=jpg&src=http%3A%2F%2Fimg1.imgtn.bdimg.com%2Fit%2Fu%3D3046597456%2C4072050019%26fm%3D214%26gp%3D0.jpg)
+
+### 8.Collections的排序？
+
+​		Arrays.sort()：主要是针对各种数据类型的数组元素排序，其中排序方法sort()实现了Comparator<T>接口，需要对其内部的比较函数compare()重写
+
+​		Collections.sort()：主要针对集合框架中的动态数组、链表、树】哈希表等进行排序，主要也是对compare的重写，通过源码可知也是调用了Arrays.sort()
 
 ### 9.HashMap的并发问题以及解决思路？（问题如何产生，能否用别的方法解决并发问题，用当前方法有什么优势，列举出其他集合类的线程并发问题）
 
 ### 10.JDK8的新特性
 
-### 11.LinkedHashMap及其他的集合类
+1. lambad表达式
 
-### 12.hashcode、equals、==
+   ​		将函数本身作为参数传递给另一个函数----函数式编程
+
+   ​		Lambda表达式是一种匿名函数
+
+2. 函数式接口
+
+   1. Supplier<T> 生产者：无输入，生产一个T类型的值
+   2. Consumer<T> 消费者：输入一个T类型的值，无输出
+   3. Function<T,R> 函数：输入一个T类型的值，返回一个R类型的值
+   4. Predicate<T> 断言：输入一个T类型的值，返回true/false
+
+3. Stream
+
+   ​		Stream是对集合对象功能的增强，专注于对集合对象进行各种非常便利、高效的聚合操作，或者大批量数据操作
+
+   ​		Stram API借助Lambda表达式能够进行串行、并行两种方式进行汇聚操作
+
+   ​		步骤：获取数据源->数据转换->执行操作获取想要的结果；每次转换原有Stream对象不改变，返回一个新的Stream对象（可以多次转换），这就允许对其操作可以像链条一样排列，形成一个管道
+
+   ![image-20200706010242960](C:\Users\Huff\AppData\Roaming\Typora\typora-user-images\image-20200706010242960.png)
+
+### 11.hashcode、equals、==
+
+​		hashcode()：默认继承Object类，其实也是根据内存地址值进行hash计算得出一个int值，通常来说，由于所有对象的地址都不同，所以需要重写；因为equals()比较的内容比较全面复杂，所以一般用hashcode()进行一次过滤；不过常见类型用equals已经足够
+
+​		equals():对于数据类型，比较值，对于引用数据类型，比较内存地址；常用类都重写了equals()方法；假若不进行重写，则默认使用的就是"=="
+
+​		==：对于数据类型，比较值，对于引用数据类型，则比较内存地址
+
+### 12、Java IO
