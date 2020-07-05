@@ -1,7 +1,5 @@
 ### 1、Spring  MVC的原理？
 
-<img src="C:\Users\Huff\AppData\Roaming\Typora\typora-user-images\image-20200706012704900.png" alt="image-20200706012704900" style="zoom:50%;" />
-
 （1）客户端（浏览器）发送请求，直接请求到DispatcherServlet。
 
 （2）DispatcherServlet根据请求信息调用HandlerMapping，解析请求对应的Handler。
@@ -17,3 +15,5 @@
 （7）DispaterServlet把返回的Model传给View。
 
 （8）通过View返回给请求者（浏览器）
+
+![image-20200706013156256](C:\Users\Huff\AppData\Roaming\Typora\typora-user-images\image-20200706013156256.png)
