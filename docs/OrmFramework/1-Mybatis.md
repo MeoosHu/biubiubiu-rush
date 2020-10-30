@@ -14,3 +14,5 @@
 4. 格式化输出：where、set、trim
 5. 配置关联关系：collection、association
 6. 定义常量：sql
+
+### 3、一级缓存与二级缓存？
