@@ -2,8 +2,9 @@
 * Java
 
   * [Java基础](./docs/Java/1-Java基础.md)
-  * [Java多线程并发](./docs/Java/2-Java多线程并发.md)
-  * [Java虚拟机](./docs/Java/3-Java虚拟机.md)
+  * [Java集合](./docs/Java/2-Java集合.md)
+  * [Java多线程并发](./docs/Java/3-Java多线程并发.md)
+  * [Java虚拟机](./docs/Java/4-Java虚拟机.md)
 
 * 操作系统
 
@@ -99,7 +100,6 @@
     * [Redis](./docs/Redis/1-Redis.md)
 	* [Memcache](./docs/)
 
-  
 * 消息中间件
 
   * [RabbitMQ](./docs/MessageQueue/1-RabbitMQ.md)
