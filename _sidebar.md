@@ -133,8 +133,9 @@
 * 分布式
 
   * [Dubbo](./docs/)
+  * [分布式事务](./docs/DistributedSystem/DistributedTransaction.md)
   
 * 架构设计
 
-  * [Dubbo](./docs/)
+  * [Dubbo](./docs/DistributedSystem/DistributedTransaction.md)
   
