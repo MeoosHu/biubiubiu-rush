@@ -20,7 +20,7 @@ typora-root-url: ..\..\picture
 
 ​		当线程执行wait()方法之后，线程进入**WAITING（等待）**状态。进入等待状态的线程需要依靠其他线程的通知才能够返回到运行状态，而**TIME_WAITING（超时等待）**状态相当于在等待状态的基础上增加了超时限制，比如通过sleep（long millis）方法或wait（long millis）方法可以将Java线程置于**TIMED WAITING**状态。当超时时间到达后Java线程将会返回到RUNNABLE状态。当线程调用同步方法后，在没有获取到锁的情况下，线程将会进入到**BLOCKER（阻塞）**状态。线程在执行Runnable的run（）方法之后将会进入到**TERMINATED（终止）**状态。
 
-### 1.ThreadLocal类
+### 2.ThreadLocal类
 
 ​		简单概述，多线程在访问共享变量时经常会出现并发问题，由此，ThreadLocal类提供了一个不需要加锁而可以规避线程不安全的方法，即提供一个线程本地变量，在实际操作的时候实际上操作的是自己本地线程中的变量
 
@@ -60,11 +60,75 @@ typora-root-url: ..\..\picture
 
 **线程池**：
 
-1. newCachedThreadPool:创建一个可缓存线程池，如果线程池长度超过处理需要，可灵活回收空闲线程，若无可回收，则新建线程
-2. newFixedThreadPool:创建一个定长线程池，可控制线程最大并发数，超出的线程会在队列中等待
-3. newScheduledThreadPool:创建一个可定期或者延时执行任务的定长线程池，支持定时及周期性任务执行
-4. newSingleThreadExecutor:创建一个单线程化的线程池，它只会用唯一的工作线程来执行任务，保证所有任务按照指定顺序(FIFO, LIFO, 优先级)执行
+1. 固定线程数的线程池
 
+   `ExecutorService newFixedThreadPool = Executors.newFixedThreadPool(5);`
+
+   ​         这种线程池里面的线程被设计成存放固定数量的线程，具体线程数可以考虑为**CPU核数\*N**（N可大可小，取决于并发的线程数，计算机可用的硬件资源等）。可以通过下面的代码来获取当前计算机的CPU的核数。
+
+   ```
+    int processors = Runtime.getRuntime().availableProcessors();
+   ```
+
+    FixedThreadPool 是通过 java.util.concurrent.Executors 创建的 ThreadPoolExecutor 实例。这个实例会复用 固定数量的线程处理一个共享的无边界队列 。任何时间点，最多有 nThreads 个线程会处于活动状态执行任务。如果当所有线程都是活动时，有多的任务被提交过来，那么它会一致在队列中等待直到有线程可用。如果任何线程在执行过程中因为错误而中止，新的线程会替代它的位置来执行后续的任务。所有线程都会一致存于线程池中，直到显式的执行 ExecutorService.shutdown() 关闭。由于阻塞队列使用了LinkedBlockingQueue，是一个无界队列，**因此永远不可能拒绝任务**。LinkedBlockingQueue在入队列和出队列时使用的是不同的Lock，意味着他们之间不存在互斥关系，在多CPU情况下，他们能正在在同一时刻既消费，又生产，真正做到并行。**因此这种线程池不会拒绝任务，而且不会开辟新的线程**，**也不会因为线程的长时间不使用而销毁线程**。这是典型的生产者----消费者问题，这种线程池**适合用在稳定且固定的并发场景**，比如**服务器**。
+
+2. 缓存的线程池
+
+   `ExecutorService newCachedThreadPool = Executors.newCachedThreadPool();`
+
+   ​        核心池大小为0，线程池最大线程数目为最大整型，**这意味着所有的任务一提交就会加入到阻塞队列中**。当线程池中的线程60s没有执行任务就终止，阻塞队列为SynchronousQueue。SynchronousQueue的take操作需要put操作等待，put操作需要take操作等待，否则会阻塞（线程池的阻塞队列不能存储，**所以当目前线程处理忙碌状态时，所以开辟新的线程来处理请求**），线程进入wait set。总结下来：①这是一个可以无限扩大的线程池；②**适合处理执行时间比较小的任务；**③线程空闲时间超过60s就会被杀死，所以长时间处于空闲状态的时候，这种线程池几乎不占用资源；④阻塞队列没有存储空间，只要请求到来，就必须找到一条空闲线程去处理这个请求，找不到则在线程池新开辟一条线程。**如果主线程提交任务的速度远远大于CachedThreadPool的处理速度，则CachedThreadPool会不断地创建新线程来执行任务，这样有可能会导致系统耗尽CPU和内存资源，所以在使用该线程池是，一定要注意控制并发的任务数，否则创建大量的线程可能导致严重的性能问题。**
+
+3. 单个线程的线程池
+
+   `ExecutorService newSingleThreadExecutor = Executors.newSingleThreadExecutor();`
+
+   SingleThreadExecutor是使用单个worker线程的Executor，作为单一worker线程的线程池，SingleThreadExecutor把corePool和maximumPoolSize均被设置为1，和FixedThreadPool一样使用的是无界队列LinkedBlockingQueue,所以带来的影响和FixedThreadPool一样。对于newSingleThreadExecutor()来说，也是**当线程运行时抛出异常的时候会有新的线程加入线程池替他完成接下来的任务**。创建一个单线程化的线程池，它只会用唯一的工作线程来执行任务，**保证所有任务按照指定顺序(FIFO, LIFO, 优先级)执行，所以这个比较适合那些需要按序执行任务的场景。**比如：一些不太重要的收尾，日志等工作可以放到单线程的线程中去执行。日志记录一般情况会比较慢（数据量大一般可能不写入数据库），顺序执行会拖慢整个接口，堆积更多请求，还可能会对数据库造成影响（事务在开启中），所以**日志记录完全可以扔到单线程的线程中去，一条条的处理**，也可以认为是一个单消费者的生产者消费者模式。
+
+4. 固定个数的线程池
+
+   `ExecutorService newScheduledThreadPool = Executors.newScheduledThreadPool(3);`
+
+   相比于第一个固定个数的线程池强大在 **①可以执行延时任务，②也可以执行带有返回值的任务**
+
+   **线程池自定义参数：**
+
+   ```
+   public ThreadPoolExecutor(int corePoolSize,
+                             int maximumPoolSize,
+                             long keepAliveTime,
+                             TimeUnit unit,
+                             BlockingQueue<Runnable> workQueue,
+                             ThreadFactory threadFactory,
+                             RejectedExecutionHandler handler)
+   ```
+
+- corePoolSize 线程池核心线程大小
+
+- maximumPoolSize 线程池最大线程数量
+
+- keepAliveTime 空闲线程存活时间
+
+- unit 空间线程存活时间单位
+
+- workQueue 工作队列（一个阻塞队列，用来存储等待执行的任务，这个参数的选择也很重要，会对线程池的运行过程产生重大影响，一般来说，这里的阻塞队列有以下几种选择：
+
+  ArrayBlockingQueue;
+
+  LinkedBlockingQueue;
+
+  SynchronousQueue;）
+
+- threadFactory 线程工厂
+
+- handler 拒绝策略（表示当拒绝处理任务时的策略，默认有以下四种取值：
+
+  ThreadPoolExecutor.AbortPolicy:丢弃任务并抛出RejectedExecutionException异常。
+
+  ThreadPoolExecutor.DiscardPolicy：也是丢弃任务，但是不抛出异常。
+
+  ThreadPoolExecutor.DiscardOldestPolicy：丢弃队列最前面的任务，然后重新尝试执行任务（重复此过程）
+
+  ThreadPoolExecutor.CallerRunsPolicy：由调用线程处理该任务）
 
 ### 5.关键字synchronized和volatile的比较
 
