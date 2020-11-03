@@ -102,4 +102,7 @@ Vector类的所有方法都是同步的，可以由两个线程安全地访问�
 
    ![image-20200706010242960](C:\Users\Huff\AppData\Roaming\Typora\typora-user-images\image-20200706010242960.png)
 
+### 11.集合中线程安全的类
+
+Vector、Stack、Hashtable、java.util.concurrent包下所有的集合类
 
