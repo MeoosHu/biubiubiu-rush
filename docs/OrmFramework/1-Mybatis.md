@@ -103,4 +103,11 @@ Mybatis 将所有 Xml 配置信息都封装到 All-In-One 重量级对象 Config
 
 Hibernate 属于全⾃动 ORM 映射⼯具，使⽤ Hibernate 查询关联对象或者关联集合对象时，可以 根据对象关系模型直接获取，所以它是全⾃动的。⽽ Mybatis 在查询关联对象或关联集合对象时，需 要⼿动编写 sql 来完成，所以，称之为半⾃动 ORM 映射⼯具。
 
-### 3、一级缓存与二级缓存？
+### 18。一级缓存与二级缓存？
+
+**一级缓存**：是 SQlSession 级别的缓存。在操作数据库时需要构造 SqlSession 对象，在对象中有一个数据结构（HashMap）用于存储缓存数据。不同的 SqlSession 之间的缓存数据区域（HashMap）是互相不影响的。
+
+**二级缓存**：是 mapper 级别的缓存，多个 SqlSession 去操作同一个mapper的sql语句，多个 SqlSession 可以共用二级缓存，二级缓存是跨 SqlSession 的。
+
+### 19.注解详情（如jdbcType，parameterType）
+
