@@ -1,4 +1,4 @@
-# super-java
+# Just-fun
 
 
 ### 安利一个在线学习Java的文档
