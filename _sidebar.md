@@ -1,8 +1,8 @@
 
 - JAVA
 
-  - [Java 基础](./docs/java/Java基础.md)
-  - [Java 集合](./docs/java/Java集合.md)
+  - [](./docs/javaBasic/Java基础.md)
+  - [Java 集合](./docs/javaBasic/Java集合.md)
   - 第三方工具包
   
     - Guaua
