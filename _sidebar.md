@@ -14,7 +14,7 @@
 - 设计模式
 
   - 设计原则
-    - [单一职责](./docs/designPattern/designPrinciple/单一职责原则.md)	
+    - [单一职责原则](./docs/designPattern/designPrinciple/单一职责原则.md)	
   - 设计模式
     - 创建型
       - [建造者模式](./docs/designPattern/designPattern/建造者模式.md)	
