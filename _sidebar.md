@@ -17,7 +17,7 @@
     - [单一职责](./docs/designPattern/designPrinciple/单一职责原则.md)	
   - 设计模式
     - 创建型
-      - 建造者模式
+      - [建造者模式](./docs/designPattern/designPattern/建造者模式.md)	
     - 结构型
     - 行为型
 
