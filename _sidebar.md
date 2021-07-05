@@ -2,12 +2,9 @@
 - JAVA
 
   - [](./docs/javaBasic/Java基础.md)
-  - [Java 集合](./docs/javaBasic/Java集合.md)
+  - Java 集合
   - 第三方工具包
-  
-    - Guaua
-    - Hutool
-    - EasyExcel
+
 
 
 - 数据结构与算法
@@ -15,8 +12,11 @@
 
   - 设计原则
     - [单一职责原则](./docs/designPattern/designPrinciple/单一职责原则.md)	
+    - 依赖倒转原则
   - 设计模式
     - 创建型
+      - 单例模式
+      - 工厂模式
       - [建造者模式](./docs/designPattern/designPattern/建造者模式.md)	
     - 结构型
     - 行为型
@@ -47,44 +47,44 @@
 
 - Spring Family
 
-  - [Spring](./docs/springFamily/Spring.md)
-  - [Spring MVC](./docs/springFamily/SpringMVC.md)
-  - [Spring Boot](./docs/springFamily/SpringBoot.md)
-  - [Spring Cloud](./docs/springFamily/SpringCloud.md)
+  - Spring
+  - Spring MVC
+  - Spring Boot
 
 - ORM框架
   - Mybatis
 
 
 - 日志框架
-
 - 数据库
   * 关系型数据库
     * MySQL
-      * [基础架构](./docs/database/MySQL/基础架构.md)
-      * [数据库设计规范](./docs/database/MySQL/数据库设计规范.md)
-      * [单表优化](./docs/database/MySQL/单表优化.md)
-      * [分库分表](./docs/database/MySQL/分库分表.md)
-      * [读写分离](./docs/database/MySQL/读写分离.md)
-      * [MySQL面试题](./docs/database/MySQL/面试题.md)
+      * 基础架构
+      * 数据库设计规范
+      * 单表优化
+      * 分库分表
+      * 读写分离
+      * MySQL面试题
   * 键值型数据库
     * Redis
-      * [面试题](./docs/database/Redis/面试题.md)
-
+      * 面试题
 - 消息中间件
 
-  * [RabbitMQ](./docs/messageQueue/RabbitMQ.md)
+  * RabbitMQ
   * RocketMQ
   * Pulsar
   * Kafka
-
 - 搜索
 
   * Elasticsearch
-
 - RPC框架
 
+  - Dubbo 
+  - gRPC 
+  - Thrift
 - 分布式
 
   * Dubbo
-  * [分布式事务](./docs/distributed/DistributedTransaction.md)
+  * 分布式事务
+  * 分布式缓存
+  * 分布式存储
