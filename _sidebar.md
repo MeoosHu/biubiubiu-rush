@@ -1,7 +1,7 @@
 
 - JAVA
 
-  - [](./docs/javaBasic/Java基础.md)
+  - Java基础
   - Java 集合
   - 第三方工具包
 
@@ -26,6 +26,7 @@
 
   - 面向对象
   - 编码规范
+    - [代码规范](./docs/codingPractice/specification/代码规范.md)
   - 重构
   - 测试
 - JVM
