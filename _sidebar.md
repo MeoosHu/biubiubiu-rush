@@ -16,8 +16,9 @@
   - 设计模式
     - 创建型
       - [单例模式](./docs/designPattern/designPattern/单例模式.md)
-      - 工厂模式
+      - [工厂模式](./docs/designPattern/designPattern/工厂模式.md)
       - [建造者模式](./docs/designPattern/designPattern/建造者模式.md)	
+      - [原型模式](./docs/designPattern/designPattern/原型模式.md)
     - 结构型
     - 行为型
 
