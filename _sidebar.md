@@ -15,7 +15,7 @@
     - 依赖倒转原则
   - 设计模式
     - 创建型
-      - 单例模式
+      - [单例模式](./docs/designPattern/designPattern/单例模式.md)
       - 工厂模式
       - [建造者模式](./docs/designPattern/designPattern/建造者模式.md)	
     - 结构型
