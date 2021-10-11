@@ -5,9 +5,39 @@
   - Java 集合
   - 第三方工具包
 
-
-
 - 数据结构与算法
+  - [前言](./docs/algorithm/前言.md)
+  - [复杂度分析](./docs/algorithm/复杂度分析.md)
+  - 基础数据结构
+    - [数组](./docs/algorithm/数组.md)
+    - [链表](./docs/algorithm/链表.md)
+    - [栈](./docs/algorithm/栈.md)
+    - [队列](./docs/algorithm/队列.md)
+    - [递归](./docs/algorithm/递归.md)
+    - [树](./docs/algorithm/树.md)
+    - [哈希](./docs/algorithm/哈希.md)
+    - [拓扑排序](./docs/algorithm/拓扑排序.md)
+  - 高级数据结构
+    - [字典树](./docs/algorithm/字典树.md)
+    - [跳表](./docs/algorithm/跳表.md)
+    - [散列表](./docs/algorithm/散列表.md)
+  - [排序算法](./docs/algorithm/排序算法.md)
+    - [冒泡排序](./docs/algorithm/冒泡排序.md)
+    - [插入排序](./docs/algorithm/插入排序.md)
+    - [选择排序](./docs/algorithm/选择排序.md)
+    - [归并排序](./docs/algorithm/归并排序.md)
+    - [快速排序](./docs/algorithm/快速排序.md)
+    - [桶排序](./docs/algorithm/桶排序.md)
+    - [计数排序](./docs/algorithm/计数排序.md)
+    - [基数排序](./docs/algorithm/基数排序.md)
+  - 算法
+    - [二分查找](./docs/algorithm/二分查找.md)
+    - [字符串匹配算法](./docs/algorithm/字符串匹配算法.md)
+    - [AC自动机](./docs/algorithm/AC自动机.md)
+    - [贪心算法](./docs/algorithm/贪心算法.md)
+    - [分治算法](./docs/algorithm/分治算法.md)
+    - [回溯算法](./docs/algorithm/回溯算法.md)
+    - [动态规划](./docs/algorithm/动态规划.md)
 - 设计模式
 
   - 设计原则
@@ -27,7 +57,7 @@
 
   - 面向对象
   - 编码规范
-    - [代码规范](./docs/codingPractice/specification/代码规范.md)
+    - [代码规范](./docs/cleanCode/specification/代码规范.md)
   - 重构
   - 测试
 - JVM
