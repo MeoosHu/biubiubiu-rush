@@ -60,8 +60,13 @@
     - [代码规范](./docs/cleanCode/specification/代码规范.md)
   - 重构
   - 测试
-- JVM
-- 并发编程
+- [并发编程](./docs/concurrent/并发编程.md)
+
+  - 基础理论
+
+    - [可见性、原子性与有序性](./docs/concurrent/可见性、原子性与有序性.md)
+  - 并发工具类
+  - 并发设计模式
 - 网络编程
 
 
