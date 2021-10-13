@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 # BiuBiuBiu-Rush
 
-Many things to do......
+=======Later equals never=======
 
-=======
-
->>>>>>> be7ebced37dc36d47cefbed85063808f7304a230
