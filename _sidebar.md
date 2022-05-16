@@ -1,12 +1,8 @@
 
-- JAVA
-
-  - Java基础
-  - Java 集合
-  - 第三方工具包
+- [Java基础](./docs/Java基础.md)
 
 - 数据结构与算法
-  - [前言](./docs/algorithm/前言.md)
+  - [前言](./docs/Java基础.md)
   - [复杂度分析](./docs/algorithm/复杂度分析.md)
   - 基础数据结构
     - [数组](./docs/algorithm/数组.md)
