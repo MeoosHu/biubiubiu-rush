@@ -1,3 +1,15 @@
+# 设计原则
+
+## 单一职责原则
+
+## 依赖倒转原则
+
+# 设计模式
+
+## 创建型
+
+### 单例模式
+
 # 单例模式
 
 > 单例模式（Single Design Pattern）：一个类只允许创建唯一一个对象（或者实例），那这个类就是一个单例类，这种设计模式就叫做单例设计模式
@@ -7,7 +19,6 @@
 ### **1、处理资源访问冲突**
 
 ```
-
 public class Logger {
   private FileWriter writer;
   
@@ -52,7 +63,6 @@ public class OrderController {
 而单例的处理思路则相对简单很多，并且不用频繁的创建对象，节省了内存空间和系统文件句柄。
 
 ```
-
 public class Logger {
   private FileWriter writer;
   private static final Logger instance = new Logger();
@@ -92,7 +102,6 @@ public class OrderController {
 如配置信息类、唯一递增ID生成器
 
 ```
-
 import java.util.concurrent.atomic.AtomicLong;
 public class IdGenerator {
   // AtomicLong是一个Java并发库中提供的一个原子变量类型,
@@ -125,7 +134,6 @@ long id = IdGenerator.getInstance().getId();
 ### **饿汉式**
 
 ```
-
 public class IdGenerator { 
   private AtomicLong id = new AtomicLong(0);
   private static final IdGenerator instance = new IdGenerator();
@@ -146,7 +154,6 @@ public class IdGenerator {
 ### **懒汉式**
 
 ```
-
 public class IdGenerator { 
   private AtomicLong id = new AtomicLong(0);
   private static IdGenerator instance;
@@ -170,7 +177,6 @@ public class IdGenerator {
 ### **双重检测**
 
 ```
-
 public class IdGenerator { 
   private AtomicLong id = new AtomicLong(0);
   private static IdGenerator instance;
@@ -201,7 +207,6 @@ public class IdGenerator {
 类似饿汉式，但又做到了延迟加载。
 
 ```
-
 public class IdGenerator { 
   private AtomicLong id = new AtomicLong(0);
   private IdGenerator() {}
@@ -225,7 +230,6 @@ public class IdGenerator {
 ### **枚举**
 
 ```
-
 public enum IdGenerator {
   INSTANCE;
   private AtomicLong id = new AtomicLong(0);
@@ -245,7 +249,6 @@ public enum IdGenerator {
 单例这种设计模式对于其中的抽象、继承、多态都支持得不好，如：
 
 ```
-
 public class Order {
   public void create(...) {
     //...
@@ -290,7 +293,6 @@ IdGenerator的使用违背了面向接口而非实现的原则，即**违背了�
 **第一种**
 
 ```
-
 public class Singleton {
   private static Singleton instance = null;
   private final int paramA;
@@ -326,7 +328,6 @@ Singleton singleton = Singleton.getInstance();
 **第二种**
 
 ```
-
 public class Singleton {
   private static Singleton instance = null;
   private final int paramA;
@@ -353,7 +354,6 @@ Singleton singleton = Singleton.getInstance(10, 50);
 **第三种**
 
 ```
-
 public class Config {
   public static final int PARAM_A = 123;
   public static final int PARAM_B = 245;
@@ -385,7 +385,6 @@ public class Singleton {
 ### 静态方法
 
 ```
-
 // 静态方法实现方式
 public class IdGenerator {
   private static AtomicLong id = new AtomicLong(0);
@@ -403,7 +402,6 @@ long id = IdGenerator.getId();
 ### 另外一种使用单例的方式
 
 ```
-
 // 1. 老的使用方式
 public demofunction() {
   //...
@@ -439,7 +437,6 @@ demofunction(idGenerator);
 利用ConcurrentHashMap，键为线程ID，值为对象，这样即不同的线程对应不同的对象，同一个线程对应于同一个对象。ThreadLocal 工具类实现更加简单，但也是基于HashMap
 
 ```
-
 public class IdGenerator {
   private AtomicLong id = new AtomicLong(0);
 
@@ -467,7 +464,6 @@ public class IdGenerator {
 为了保证进程间，即集群环境下只有一个实例，一个进程获取到对象后，需要对对象加锁，避免其他进程再次获取；在使用完后，需要从内存中删除对象，并解锁
 
 ```
-
 public class IdGenerator {
   private AtomicLong id = new AtomicLong(0);
   private static IdGenerator instance;
@@ -506,7 +502,6 @@ IdGenerator.freeInstance();
 “多例”指的就是一个类可以创建多个对象，但是个数是有限制的，比如只能创建 3 个对象。跟线程实现唯一单例差不多，都是通过一个map来控制对象的个数
 
 ```
-
 public class BackendServer {
   private long serverNo;
   private String serverAddress;
@@ -544,3 +539,13 @@ public class BackendServer {
 - [java.lang.Runtime#getRuntime()](http://docs.oracle.com/javase/8/docs/api/java/lang/Runtime.html#getRuntime())
 - [java.awt.Desktop#getDesktop()](http://docs.oracle.com/javase/8/docs/api/java/awt/Desktop.html#getDesktop--)
 - [java.lang.System#getSecurityManager()](http://docs.oracle.com/javase/8/docs/api/java/lang/System.html#getSecurityManager--)
+
+### 工厂模式
+
+### 建造者模式
+
+### 原型模式
+
+## 结构型
+
+## 行为型
