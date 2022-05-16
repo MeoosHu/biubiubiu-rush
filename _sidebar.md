@@ -2,28 +2,10 @@
 - [Java基础](./docs/Java基础.md)
 
 - [数据结构与算法](./docs/algorithm.md)
-- 设计模式
-
-  - 设计原则
-    - [单一职责原则](./docs/designPattern/designPrinciple/单一职责原则.md)	
-    - 依赖倒转原则
-  - 设计模式
-    - 创建型
-      - [单例模式](./docs/designPattern/designPattern/单例模式.md)
-      - [工厂模式](./docs/designPattern/designPattern/工厂模式.md)
-      - [建造者模式](./docs/designPattern/designPattern/建造者模式.md)	
-      - [原型模式](./docs/designPattern/designPattern/原型模式.md)
-    - 结构型
-    - 行为型
+- [设计模式](./docs/designPattern.md)
 
 
-- 编码实践
-
-  - 面向对象
-  - 编码规范
-    - [代码规范](./docs/cleanCode/specification/代码规范.md)
-  - 重构
-  - 测试
+- [编码实践](./docs/bestPractice.md)
 - [并发编程](./docs/concurrent/并发编程.md)
   - 基础理论
 
@@ -55,7 +37,6 @@
   - Mybatis
 
 
-- 日志框架
 - 数据库
   * 关系型数据库
     * MySQL
@@ -68,23 +49,9 @@
   * 键值型数据库
     * Redis
       * 面试题
-- 消息中间件
-
-  * RabbitMQ
-  * RocketMQ
-  * Pulsar
-  * Kafka
+- [消息中间件](./docs/messageQueue.md)
 - 搜索
 
-  * Elasticsearch
 - RPC框架
 
-  - Dubbo 
-  - gRPC 
-  - Thrift
 - 分布式
-
-  * Dubbo
-  * 分布式事务
-  * 分布式缓存
-  * 分布式存储
