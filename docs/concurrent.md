@@ -18,7 +18,7 @@
 
 锁除了性能问题，还要注意**死锁**问题。
 
-![并发编程全景图](../../picture/并发编程全景图.webp)
+![并发编程全景图](../picture/并发编程全景图.webp)
 
 **推荐资料**
 
@@ -46,7 +46,7 @@ http://ifeve.com 、http://www.cs.umd.edu/~pugh/java/memoryModel/
 
 > 可见性：一个线程对共享变量的修改，另外一个线程能够立刻看到
 
-![多核CPU的缓存与内存关系图](F:\github\biubiubiu-rush\picture\多核CPU的缓存与内存关系图.webp)
+![多核CPU的缓存与内存关系图](../picture/多核CPU的缓存与内存关系图.webp)
 
 1. 线程A和B同时开始运行，线程A执行V+1，此时并未写入内存
 2. 线程B开始执行，读取到V=0，此时**线程A执行后的V对B不可见**，然后执行V+1
@@ -60,7 +60,7 @@ http://ifeve.com 、http://www.cs.umd.edu/~pugh/java/memoryModel/
 
 所以任务切换也往往指的是线程切换，在高级语言里，一条语句往往由多条CPU指令组成，而操作系统做任务切换时可能发生在任何**一条CPU**指令前后，故会导致并发问题。
 
-![非原子操作的执行路径示意图](F:\github\biubiubiu-rush\picture\非原子操作的执行路径示意图.webp)
+![非原子操作的执行路径示意图](../picture/非原子操作的执行路径示意图.webp)
 
 上图我们创建了两个线程来执行count+1操作，而count+1的CPU指令如下:
 
@@ -99,7 +99,7 @@ public class Singleton {
 
 而实际上编译器对其优化后顺序可能就变为了**1->3->2**，在线程A先执行getInstance()方法，在赋值给instance变量后发生了线程切换；B线程此时进入第一次判断instance不为空，则直接返回，从而可能触发空指针异常,如下图。可通过**volatile**关键字对变量禁止指令重排解决。
 
-![](F:\github\biubiubiu-rush\picture\双重检查创建单例的异常执行路径.webp)
+![](../picture/双重检查创建单例的异常执行路径.webp)
 
 缓存、线程、编译优化都是为了提高程序性能，但同时又带来了新的问题。由此，我们**在采用一项技术的同时，一定要清楚它带来的问题是什么，以及如何规避**。
 
@@ -184,3 +184,6 @@ public ReentrantLock(boolean fair){
 # 并发工具类
 
 # 并发设计模式
+
+# Q&A
+
