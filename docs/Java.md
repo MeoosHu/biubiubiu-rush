@@ -1,7 +1,3 @@
----
-typora-root-url: ..\..\picture
----
-
 # Java基础
 
 ### 1.Java语言特点
