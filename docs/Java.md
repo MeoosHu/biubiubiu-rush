@@ -1,6 +1,10 @@
 # Java基础
 
-### 1.Java语言特点
+## 泛型
+
+## Q&A
+
+### Java语言特点
 
 - 特点：
 
@@ -28,7 +32,7 @@
 
   ​		OpenJDK是一个参考模型，并完全开源，但Oracle JDK是Open JDK的一个实现，有更多的类并且修复了一些错误，建议使用Oracle JDK。
 
-### 2.基本数据类型
+### 基本数据类型
 
 ![](../picture/数据类型.png)
 
@@ -147,7 +151,7 @@ public class Main {
 
 ​		倒数第一个和倒数第二个注意：数值是int类型的，装箱过程调用的是Integer.valueOf；如果是long类型的，装箱调用的Long.valueOf方法
 
-### 3.Java关键字
+### Java关键字
 
 ![](../picture/关键字.jpg)
 
@@ -156,7 +160,7 @@ public class Main {
 - transient:表示不用序列化的成员域
 - volatile：表明两个或者多个变量必须同步地发生变化
 
-### 5.Java泛型
+### Java泛型
 
 ​		泛型在JDK1.5引入，提供了编译时类型安全检测机制，即在编译时能够检测到非法的类型，泛型的本质是参数化类型。在没有泛型时，往往需要对类型Object进行引用进而实现参数的"任意化"，而这种转换需要强制类型转换，即需要开发者对实际参数类型可以预知。而对于强制类型转换错误的情况，编译器可能不提示错误，而报运行时异常，是一个安全隐患。
 
@@ -292,7 +296,7 @@ public class Test3<T> {
 
 ```
 
-### 6.==与equals()
+### ==与equals()
 
 ​		==：判断两个对象的地址是否相等，即是否为同一个对象。（**基本数据类型比较的是值，引用数据类型比较的是内存地址**）。
 
@@ -312,7 +316,7 @@ public boolean equals(Object obj) {
 
 > String类中重写了equals()方法，比较值是否相等，当创建String类型的对象时，JVM会在常量池中查找是否有存在的相同的值，若有，则将其赋值给当前引用，没有则在常量池中重新创建一个String对象
 
-### 7.hashcode()与equals()
+### hashcode()与equals()
 
 ​		**hashcode()**:该方法也是Object类的一个函数，作用是返回一个int整数（哈希码或散列码），可以确定该对象在哈希表中的索引位置。需要注意的是：Object的hashcode方法是本地方法，也就是用C或C++实现的，该方法通常用来将对象的内存地址转换为整数后返回。**hashcode()通常只是为了缩小查找范围**
 
@@ -333,7 +337,7 @@ public native int hashCode()
 
 ​	    **两个对象具有相同的hashcode值，却不一定相等，此时就是产生了哈希冲突**
 
-### 8.重载与重写
+### 重载与重写
 
 ​		**重载：**同一个类中多个同名方法根据不同的传参来执行不同的逻辑处理
 
@@ -343,20 +347,20 @@ public native int hashCode()
 - 如果父类方法访问修饰符为private/final/static，则子类就不能重写该方法，但是被static修饰的方法能够被再次声明
 - 构造方法无法被重写
 
-### 9.深拷贝 && 浅拷贝
+### 深拷贝 && 浅拷贝
 
 ​		**浅拷贝：**对基本数据类型进行值传递，对引用数据类型进行引用传递般的拷贝
 
 ​		**深拷贝：**对基本数据类型进行值传递，对引用数据类型，创建一个新的对象，并复制其内容
 
-### 10.成员变量与局部变量的区别有哪些？
+### 成员变量与局部变量的区别有哪些？
 
 1. 语法形式：成员变量属于类，且可以被private、public、static等修饰符所修饰，而局部变量是在方法中定义的变量或是方法的参数，不能被访问修饰符修饰，但两者都能被final修饰。
 2. 存储方式：若成员变量是用static修饰的，那么它属于类，没有则属于实例，而对象存在于堆内存，局部变量存在于栈内存。
 3. 生存时间：成员变量是对象的一部分，它随着对象的创建而存在，而局部变量随着方法的调用而自动消失。
 4. 成员变量如果没有被赋初值，则会自动以类型的默认值作为初值（例外：被final修饰的成员变量必须显式的赋值），而局部变量则不会自动赋值。
 
-### 11.接口与抽象类的区别是什么？
+### 接口与抽象类的区别是什么？
 
 1. 接口的方法默认是public，所有方法在接口中不能有实现（JDK 8开始接口方法可以有默认实现），而抽象类可以有非抽象的方法
 2. 接口中除了static、final变量，不能有其他变量，而抽象类则不一定
@@ -370,7 +374,7 @@ public native int hashCode()
 >
 > 2.JDK1.9的接口被允许定义私有方法
 
-### 12.String、StringBuffer、StringBuilder的区别？String为什么不可变？
+### String、StringBuffer、StringBuilder的区别？String为什么不可变？
 
 ​		String类中使用final关键字修饰字符数组来保存字符串，private final char value[]，所以String对象不可变。（JDK1.9之后改用byte数组存储）
 
@@ -408,7 +412,7 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
 - 单线程操作字符串缓冲区下操作大量数据：StringBuilder
 - 多线程操作字符串缓冲区下操作大量数据：StringBuffer
 
-### 13.Object类常见方法
+### Object类常见方法
 
 ```
 public final native Class<?> getClass()//native⽅法，⽤于返回当前运⾏时对象的Class对象，使⽤了final关键字修饰，故不允许⼦类重写。
@@ -436,13 +440,13 @@ public final void wait() throws InterruptedException//跟之前的2个wait⽅法
 protected void finalize() throws Throwable { }//实例被垃圾回收器回收的时候触发的操作
 ```
 
-### 14.Java序列化部分字段不想进行序列化如何实现呢？
+### Java序列化部分字段不想进行序列化如何实现呢？
 
 ​		对于不想实现序列化的变量，使用transient关键字修饰
 
 ​		transient关键字的作用是：阻止实例中那些用关键字修饰的变量序列化；当对象被反序列化时，被transient修饰的变量不会被持久化和恢复。transient只能修饰变量，不能修饰类和方法。
 
-### 15.获取用键盘输入常用的两种方法
+### 获取用键盘输入常用的两种方法
 
 1. 通过Scanner
 
@@ -459,7 +463,7 @@ protected void finalize() throws Throwable { }//实例被垃圾回收器回收�
    String s = input.readLine();
    ```
 
-### 16、Java异常
+### Java异常
 
 ​		在Java中，所有异常的祖先都是Java.lang包下的**Throwable**类。而Throwable类有两个重要的子类：**Exception（异常）**和**Error（错误）**。
 
@@ -534,7 +538,7 @@ try (Scanner scanner = new Scanner(new File("test.txt"))) {
 
 ![](../picture/exception1.jpg)
 
-### 17、Java IO
+### Java IO
 
 ​		**IO流的分类：**
 
@@ -561,14 +565,14 @@ try (Scanner scanner = new Scanner(new File("test.txt"))) {
 
 ​		回答：字符流是由Java虚拟机将字节转换得到的，问题就出在这个过程还算是非常耗时，并且，如果我们不知道编码类型就很容易出现乱码问题。所以，I/O流就干脆提供了一个直接操作字符的接口，方便我们平时对字符进行流操作。如果音频文件、图片等媒体文件用字节流比较好，如果涉及到字符的话使用字符流比较好
 
-### 18.访问修饰符的作用域
+### 访问修饰符的作用域
 
 - **default**:变量或者方法前没有访问修饰符时，可以被所在类访问，可以被同一包内的其他类访问或者继承，**但是不能被其他包访问**
 - **private**：被private修饰的属性和方法，不能被其他类访问，子类不能继承也不能访问，**只能在所在类内部访问**
 - **protected**：被protected修饰的方法和属性，在**同一包内可被继承和访问，不同包内，子类可继承**，非子类不能访问
 - **public**：可以被任意包内的类访问
 
-### 19.子类和抽象类的方法执行顺序
+### 子类和抽象类的方法执行顺序
 
 - 父类静态代码块
 - 子类静态代码块
