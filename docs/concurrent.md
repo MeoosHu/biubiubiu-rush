@@ -309,3 +309,6 @@ public ReentrantLock(boolean fair){
 
 13. 线程的各种状态以及切换场景？
 
+14. **synchronized的锁升级**
+
+&emsp;&emsp;无锁->偏向锁->轻量级锁->重量级锁
