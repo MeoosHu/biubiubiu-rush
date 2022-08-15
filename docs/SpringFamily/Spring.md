@@ -1,4 +1,4 @@
-### 1.Spring是什么？
+# Spring是什么？
 
 ​		Spring是一种轻量级开发框架，官网：http://spring.io/；而我们常说的Spring是指Spring Framework，它是很多模块的集合，如核心容器、数据访问/集成、Web、AOP、工具、消息和测试模块。比如：Core Container中的Core组件是Spring所有组件的核心，Beans组件和Context组件是实现IOC和依赖注入的基础，AOP组件用来实现面向切面编程。
 
@@ -11,17 +11,17 @@
 - **集成**：远程处理，JMS，JCA，JMX，电子邮件，任务，调度，缓存
 - **语言**：Kotlin，Groovy，动态语言
 
-### 2.IOC
+# IOC
 
 ​		IOC（Inspection of Control：控制反转）是一种设计思想，也被称为DI（Dependency Injection），即由Spring IOC容器来负责对象的声明周期和对象之间的关系。
 
 ​		Spring IOC的初始化过程：https://javadoop.com/post/spring-ioc
 
-### 3.AOP
+# AOP
 
 ​		AOP（Aspect-Oriented Programming：面向切面编程）主要解决一些系统层面上的问题，如日志，事务，权限等，即将那些与业务无关，却为业务模块所共同调用的逻辑和责任封装起来，便于减少系统的重复代码，降低模块之间的耦合度，提高了可操作性和可维护性。
 
-### 4.Spring Bean
+# Spring Bean
 
 （1）Spring中的bean的作用域有哪些？
 
@@ -60,7 +60,7 @@ public class AppConfig{
 
 > 只要是被@Component修饰的类或注解都可以定义@Bean，都可以注册进Spring容器里面，如@Repository、@Service、@Controller @Configuration
 
-### 5.Spring Bean的声明周期
+**Spring Bean的声明周期**
 
 实例化->属性赋值->（前置处理）->初始化->（后置处理）->销毁
 
@@ -90,7 +90,7 @@ https://www.jianshu.com/p/1dec08d290c1
 
 6. **DisposableBean和destroy-method**：通过给destroy-method指定函数，就可以在bean销毁前执行指定的逻辑。
 
-### 5.Spring事务
+# Spring事务
 
 ​		Spring事务分为编程式事务（硬编码，不推荐）和声明式事务（配置文件配置，推荐），声明式事务可用XML或注解进行配置
 
@@ -136,6 +136,8 @@ https://www.jianshu.com/p/1dec08d290c1
 - read-only：指定事务是否为只读事务，默认为false；为了忽略那些不需要事务的方法，比如读取事务，可以设置read-only为true
 - rollback-for：用于指定能够触发事务回滚的异常类型，如果有多个异常类型需要指定，各类型之间可以通过逗号分隔
 - no-rollback-for：抛出no-rollback-for指定的异常类型，不回滚事务
+
+# Q&A
 
 
 
