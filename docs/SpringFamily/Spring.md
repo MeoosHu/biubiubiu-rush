@@ -13,7 +13,7 @@
 
 # IOC
 
-​		IOC（Inspection of Control：控制反转）是一种设计思想，也被称为DI（Dependency Injection），即由Spring IOC容器来负责对象的声明周期和对象之间的关系。
+​		IOC（Inspection of Control：控制反转）是一种设计思想，也被称为DI（Dependency Injection），即由Spring IOC容器来负责对象的生命周期和对象之间的关系。
 
 ​		Spring IOC的初始化过程：https://javadoop.com/post/spring-ioc
 
