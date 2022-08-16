@@ -1,8 +1,8 @@
-# Spring是什么？
+# Spring基础概念
 
-​		Spring是一种轻量级开发框架，官网：http://spring.io/；而我们常说的Spring是指Spring Framework，它是很多模块的集合，如核心容器、数据访问/集成、Web、AOP、工具、消息和测试模块。比如：Core Container中的Core组件是Spring所有组件的核心，Beans组件和Context组件是实现IOC和依赖注入的基础，AOP组件用来实现面向切面编程。
+Spring是一个轻量级的、非侵入式的控制反转(IOC)和面向切面(AOP)的框架；而我们常说的Spring是指Spring Framework，它是很多模块的集合，如核心容器、数据访问/集成、Web、AOP、工具、消息和测试模块。比如：Core Container中的Core组件是Spring所有组件的核心，Beans组件和Context组件是实现IOC和依赖注入的基础，AOP组件用来实现面向切面编程。
 
-​		Spring的6个特征：
+Spring的6个特征：
 
 - **核心技术**：依赖注入（DI），AOP，事件（events），资源，i18n，验证，数据绑定，类型转换
 - **测试**：模拟对象，TestContext框架，Spring MVC测试，WebTestClient
@@ -11,11 +11,91 @@
 - **集成**：远程处理，JMS，JCA，JMX，电子邮件，任务，调度，缓存
 - **语言**：Kotlin，Groovy，动态语言
 
+## **核心模块**
+
+- **Spring Core**：Spring核心包，是框架最基础的部分，提供IOC和依赖注入DI特性。
+- **Spring Context**：Spring上下文容器，它是BeanFactory功能加强的一个子接口。
+- **Spring Web**：它提供web应用开发的支持。
+- **Spring MVC**：它针对web应用中MVC思想的实现。
+- **Spring DAO**：提供对JDBC抽象层，简化了JDBC编码，同时，编码更具有健壮性。
+- **Spring ORM**：它支持用于流行的ORM框架的整合，比如Spring+Hibernate、Spring+ibatis等
+- **Spring AOP**：即面向切面编程。
+
+## 常用注解
+
+### **web相关**
+
+**@Controller**
+
+多个request请求进来如何保证线程安全
+
+**@RestController**
+
+**@RequestMapping**
+
+@GetingMapping、@PostMapping、@PutMapping、@DeleteMapping
+
+**@ResponseBody**
+
+**@RequestBody**
+
+**@PathVariable**
+
+### **容器**
+
+**@Component与@Bean**
+
+**@Service与@Repository**
+
+**@Autowired与@Qualifer**
+
+**@Comfiguration与@Value**
+
+**@Scope**
+
+### **AOP**
+
+@Aspect(@After、@Before、@Around、@PointCut)
+
+### **事务**
+
+@Transational
+
+## **设计模式在Spring中的应用**
+
+### 工厂模式
+
+Spring容器本质上是一个大工厂，使用工厂模式通过BeanFactory、ApplicationContext创建Bean对象。
+
+### 代理模式
+
+Spring AOP功能就是通过代理模式实现的，分为动态代理和静态代理。
+
+### 单例模式
+
+Spring中的Bean默认都是单例的，有利于容器对Bean的管理。
+
+### 模板模式
+
+Spring中JdbcTemplate、RestTemplate等以Template结尾的对数据库、网络等进行操作的模板类
+
+### 观察者模式
+
+Spring事件驱动模型就是观察者模式的一个经典应用。
+
+### 适配器模式
+
+Spring AOP的增强或通知（Advice）使用到了适配器模式、Spring MVC中也是用到了适配器模式适配Controller。
+
+### 策略模式
+
+Spring中有一个Resource接口，它的不同实现类，会根据不同的策略去访问资源。
+
 # IOC
 
-​		IOC（Inspection of Control：控制反转）是一种设计思想，也被称为DI（Dependency Injection），即由Spring IOC容器来负责对象的生命周期和对象之间的关系。
+IOC（Inspection of Control：控制反转）是一种设计思想，也被称为DI（Dependency Injection），即由Spring IOC容器来负责对象的生命周期和对象之间的关系。
 
-​		Spring IOC的初始化过程：https://javadoop.com/post/spring-ioc
+Spring IOC的初始化过程：https://javadoop.com/post/spring-ioc
 
 # AOP
 
