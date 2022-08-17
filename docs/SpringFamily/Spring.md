@@ -45,6 +45,8 @@ Spring的6个特征：
 
 **@Component与@Bean**
 
+@Bean的加载过程是怎么样的？
+
 **@Service与@Repository**
 
 **@Autowired与@Qualifer**
@@ -93,17 +95,77 @@ Spring中有一个Resource接口，它的不同实现类，会根据不同的策
 
 # IOC
 
-IOC（Inspection of Control：控制反转）是一种设计思想，也被称为DI（Dependency Injection），即由Spring IOC容器来负责对象的生命周期和对象之间的关系。
+&emsp;&emsp;IOC（Inspection of Control：控制反转）是一种设计思想，即由Spring IOC容器来负责对象的生命周期和对象之间的关系。
 
-Spring IOC的初始化过程：https://javadoop.com/post/spring-ioc
+&emsp;&emsp;DI（Dependency Injection）指的是容器在实例化对象的时候把它依赖的类注入给它。
+
+## **Spring容器启动阶段实现原理**   
+
+&emsp;&emsp;容器启动阶段
+
+- 加载配置
+
+- 分析配置信息
+
+- 装配到BeanDefinition
+
+- 其他后处理
+
+  Bean实例化阶段
+
+- 实例化对象
+
+- 装配依赖
+
+- 生命周期回调
+
+- 对象其他处理
+
+- 注册回调接口
+
+[Spring IOC容器源码分析]: https://javadoop.com/post/spring-ioc
+
+## 简易版Spring IOC容器实现
+
+## BeanFactory与ApplicationContext
+
+## 循环依赖
 
 # AOP
 
-​		AOP（Aspect-Oriented Programming：面向切面编程）主要解决一些系统层面上的问题，如日志，事务，权限等，即将那些与业务无关，却为业务模块所共同调用的逻辑和责任封装起来，便于减少系统的重复代码，降低模块之间的耦合度，提高了可操作性和可维护性。
+&emsp;&emsp;AOP（Aspect-Oriented Programming：面向切面编程）主要解决一些系统层面上的问题，如日志，事务，权限等，即将那些与业务无关，却为业务模块所共同调用的逻辑和责任封装起来，便于减少系统的重复代码，降低模块之间的耦合度，提高了可操作性和可维护性。
+
+**核心概念**
+
+- 切面：类是对物体特征的抽象，切面就是对横切关注点的抽象
+- 连接点：被拦截到的点，因为Spring只支持方法类型的连接点，所以在Spring中连接点指的是被拦截到的方法，实际上连接点还可以是字段或者构造器
+- 切点：对连接点进行拦截的定位
+- 通知：所谓通知指的就是拦截到连接点之后要执行的代码，也可以称为增强
+- 目标对象：代理的目标对象
+- 织入：织入是将增强添加到目标类的具体连接点上的过程
+  - 编译器织入：切面在目标类编译时被织入
+  - 类加载期织入：切面在目标类加载到JVM时被织入。一般情况下，在织入切面时，AOP容器会为目标对象动态地创建一个代理对象。Spring AOP就是以这种方式，Spring采用运行期织入，而AspectJ采用编译期织入和类加载器织入
+- 引介：引介是一种特殊的增强，可以动态地为类添加一些属性和方法
+
+**环绕方式**
+
+- 前置通知（@Before）
+- 返回通知（@AfterReturning）
+- 异常通知（@AfterThrowing）
+- 后置通知（@After）
+- 环绕通知（@Around）
+
+&emsp;&emsp;多个切面的情况下，可以通过@Order指定先后顺序，数字越小，优先级越高
+
+**手写AOP**
+
+todo
+
+**JDK动态代理和CGLIB代理**
 
 # Spring Bean
 
-（1）Spring中的bean的作用域有哪些？
+**Spring中bean的作用域**
 
 - singleton：唯一bean实例，Spring中的bean默认都是单例的
 - prototype：每次请求都会创建一个新的bean实例
@@ -111,16 +173,19 @@ Spring IOC的初始化过程：https://javadoop.com/post/spring-ioc
 - session：每一次Http请求都会产生一个新的bean，该bean仅在当前Http session内有效
 - globalsession：全局session作用域，仅仅在基于protlet的web应用中才有意义，Spring5已经取消。
 
-（2）Spring Bean的单例Bean的线程安全问题
+**Spring Bean的单例Bean的线程安全问题**
 
-​		当多个线程同时操作同一个对象的时候，对这个对象的非静态成员变量的写操作会存在线程安全问题。
+&emsp;&emsp;当多个线程同时操作同一个对象的时候，对这个对象的非静态成员变量的写操作会存在线程安全问题。
 
-​		常见的两种解决办法：
+&emsp;&emsp;但如果这个Bean是无状态的，如Spring MVC中的Controller、Service、Dao等，线程中的操作无法对Bean中的成员变量执行查询以外的操作，那么这个单例Bean是线程安全的。
 
-1. 在Bean对象中尽量笔迷那定义可变的成员变量（不现实）
-2. 在类中定义一个ThreadLocal成员变量，将需要的可变成员变量保存在ThreadLocal中（推荐）
+&emsp;&emsp;常见解决办法：
 
-（3）@Component和@Bean的区别
+1. 将Bean定义为多例，但这样容器不好管理
+2. 在Bean对象中尽量笔迷那定义可变的成员变量（不现实）
+3. 在类中定义一个ThreadLocal成员变量，将需要的可变成员变量保存在ThreadLocal中（推荐）
+
+**@Component和@Bean的区别**
 
 1. 作用对象不同：@Component注解作用于类，@Bean作用于方法
 2. @Component通常是通过类路径扫描来自动检测以及自动装配到Spring的Bean容器中；@Bean注解通常是我们在标有该注解的方法中定义产生这个bean，@Bean告诉了Spring这是某个类的示例。
@@ -140,7 +205,7 @@ public class AppConfig{
 
 > 只要是被@Component修饰的类或注解都可以定义@Bean，都可以注册进Spring容器里面，如@Repository、@Service、@Controller @Configuration
 
-**Spring Bean的声明周期**
+**Spring Bean的生命周期**
 
 实例化->属性赋值->（前置处理）->初始化->（后置处理）->销毁
 
@@ -169,6 +234,21 @@ https://www.jianshu.com/p/1dec08d290c1
    ​		当然，Spring为了降低对客户代码的侵入性，给bean的配置提供了init-method属性，该属性指定了在这一阶段需要执行的函数名。Spring便会在初始化阶段执行我们设置的函数。init-method本质上仍然使用了InitializingBean接口。
 
 6. **DisposableBean和destroy-method**：通过给destroy-method指定函数，就可以在bean销毁前执行指定的逻辑。
+
+**Spring Bean的依赖注入**
+
+构造方法注入
+
+属性注入
+
+工厂方法注入（静态工厂、非静态工厂）
+
+**自动装配及原理**
+
+- byName
+- byType
+- constructor
+- autodetect
 
 # Spring事务
 
