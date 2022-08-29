@@ -274,16 +274,16 @@ https://www.jianshu.com/p/1dec08d290c1
 
 # Spring事务
 
-​		Spring事务分为编程式事务（硬编码，不推荐）和声明式事务（配置文件配置，推荐），声明式事务可用XML或注解进行配置
+&emsp;&emsp;Spring事务分为编程式事务（硬编码，不推荐）和声明式事务（配置文件配置，推荐），声明式事务可用XML或注解进行配置
 
-（1）**事务的特性**
+&emsp;&emsp;**事务的特性**
 
 - **原子性（Atomicity）**：事务是一个原子操作，由一系列动作组成。事务的原子性确保动作要么全部完成，要么完全不起作用。
 - **一致性（Consistency）：**一旦事务完成（不管成功还是失败），系统必须确保它所建模的业务处于一致的状态，而不会是部分完成部分失败。在现实中的数据不应该被破坏。
 - **隔离性（Isolation）**：可能有许多事务会同时处理相同的数据，因此每个事务都应该与其他事务隔离开来，防止数据损坏。
 - **持久性（Durability）**：一旦事务完成，无论发生什么系统错误，它的结果都不应该受到影响，这样就能从任何系统崩溃中恢复过来。通常情况下，事务的结果被写到持久化存储器中。
 
-（2）**事务传播特性**
+&emsp;&emsp;**事务传播特性**
 
 - **propagation_requierd**：如果当前没有事务，就新建一个事务，如果已存在一个事务中，加入到这个事务中，这是最常见的选择。
 - **propagation_supports**：支持当前事务，如果没有当前事务，就以非事务方法执行。
@@ -293,7 +293,7 @@ https://www.jianshu.com/p/1dec08d290c1
 - **propagation_never**：以非事务方式执行操作，如果当前事务存在则抛出异常。
 - **propagation_nested**：如果当前存在事务，则在嵌套事务内执行。如果当前没有事务，则执行与propagation_required类似的操作。它使用了一个单独的事务，这个事务拥有多个可以回滚的保存点。内部事务的回滚不会对外部事务造成影响。它只对DataSourceTransactionManager事务管理器生效。
 
-（3）**事务隔离级别**
+&emsp;&emsp;**事务隔离级别**
 
 ​		TransactionDefinition接口中定义了5个表示隔离级别的常量：
 
@@ -303,7 +303,7 @@ https://www.jianshu.com/p/1dec08d290c1
 - TransactionDefinition.ISOLATION_REPEATABLE_READ:对同一字段的多次读取结果都是一致的，除非数据是被本身事务自己所修改，**可以阻止脏读和不可重复读，但幻读仍有可能发生**。
 - TransactionDefinition.ISOLATION_SERIALIZABLE:可序列化，最高的隔离级别，完全符合ACID的隔离级别。所有的事务依次逐个执行，这样事务之间就完全不可能产生干扰，该级别可以**防止脏读、幻读和不可重复读**，但严重影响程序性能，通常不会使用。
 
-（4）**@Transactional（rollbackFor=Exception.class）**
+&emsp;&emsp;**@Transactional（rollbackFor=Exception.class）**
 
 ​		Exception分为运行时异常和非运行时异常，当@Transactional注解作用于类上，该类的所有**public**方法都将具有该类型的事务属性，同时，在方法加此注解可以覆盖类级别的定义。如果类或者方法上加了这个注解，那么这个类里面的方法抛出异常，就会回滚，数据库里面的数据也会回滚。
 
@@ -319,9 +319,19 @@ https://www.jianshu.com/p/1dec08d290c1
 - rollback-for：用于指定能够触发事务回滚的异常类型，如果有多个异常类型需要指定，各类型之间可以通过逗号分隔
 - no-rollback-for：抛出no-rollback-for指定的异常类型，不回滚事务
 
-**声明式事务实现原理**
+&emsp;&emsp;**声明式事务实现原理**
 
-**声明式事务在哪些情况下会失效**
+&emsp;&emsp;即通过AOP/动态代理。
+
+- 在Bean初始化阶段创建代理对象
+- 在执行目标方法时进行事务增强操作
+
+&emsp;&emsp;**声明式事务在哪些情况下会失效**
+
+- @Transational应用在非public修饰的方法上
+- @Transational注解属性propagation设置错误
+- @Transational注解属性rollbackFor设置错误
+- 同一个类中方法调用，导致@Transational失效
 
 # Q&A
 
