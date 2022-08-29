@@ -1,8 +1,8 @@
 # Spring基础概念
 
-Spring是一个轻量级的、非侵入式的控制反转(IOC)和面向切面(AOP)的框架；而我们常说的Spring是指Spring Framework，它是很多模块的集合，如核心容器、数据访问/集成、Web、AOP、工具、消息和测试模块。比如：Core Container中的Core组件是Spring所有组件的核心，Beans组件和Context组件是实现IOC和依赖注入的基础，AOP组件用来实现面向切面编程。
+&emsp;&emsp;Spring是一个轻量级的、非侵入式的控制反转(IOC)和面向切面(AOP)的框架；而我们常说的Spring是指Spring Framework，它是很多模块的集合，如核心容器、数据访问/集成、Web、AOP、工具、消息和测试模块。比如：Core Container中的Core组件是Spring所有组件的核心，Beans组件和Context组件是实现IOC和依赖注入的基础，AOP组件用来实现面向切面编程。
 
-Spring的6个特征：
+&emsp;&emsp;Spring的6个特征：
 
 - **核心技术**：依赖注入（DI），AOP，事件（events），资源，i18n，验证，数据绑定，类型转换
 - **测试**：模拟对象，TestContext框架，Spring MVC测试，WebTestClient
@@ -27,13 +27,13 @@ Spring的6个特征：
 
 **@Controller**
 
-多个request请求进来如何保证线程安全
+&emsp;&emsp;多个request请求进来如何保证线程安全
 
 **@RestController**
 
 **@RequestMapping**
 
-@GetingMapping、@PostMapping、@PutMapping、@DeleteMapping
+&emsp;&emsp;@GetingMapping、@PostMapping、@PutMapping、@DeleteMapping
 
 **@ResponseBody**
 
@@ -45,7 +45,7 @@ Spring的6个特征：
 
 **@Component与@Bean**
 
-@Bean的加载过程是怎么样的？
+&emsp;&emsp;@Bean的加载过程是怎么样的？
 
 **@Service与@Repository**
 
@@ -57,41 +57,41 @@ Spring的6个特征：
 
 ### **AOP**
 
-@Aspect(@After、@Before、@Around、@PointCut)
+&emsp;&emsp;@Aspect(@After、@Before、@Around、@PointCut)
 
 ### **事务**
 
-@Transational
+&emsp;&emsp;@Transational
 
 ## **设计模式在Spring中的应用**
 
 ### 工厂模式
 
-Spring容器本质上是一个大工厂，使用工厂模式通过BeanFactory、ApplicationContext创建Bean对象。
+&emsp;&emsp;Spring容器本质上是一个大工厂，使用工厂模式通过BeanFactory、ApplicationContext创建Bean对象。
 
 ### 代理模式
 
-Spring AOP功能就是通过代理模式实现的，分为动态代理和静态代理。
+&emsp;&emsp;Spring AOP功能就是通过代理模式实现的，分为动态代理和静态代理。
 
 ### 单例模式
 
-Spring中的Bean默认都是单例的，有利于容器对Bean的管理。
+&emsp;&emsp;Spring中的Bean默认都是单例的，有利于容器对Bean的管理。
 
 ### 模板模式
 
-Spring中JdbcTemplate、RestTemplate等以Template结尾的对数据库、网络等进行操作的模板类
+&emsp;&emsp;Spring中JdbcTemplate、RestTemplate等以Template结尾的对数据库、网络等进行操作的模板类
 
 ### 观察者模式
 
-Spring事件驱动模型就是观察者模式的一个经典应用。
+&emsp;&emsp;Spring事件驱动模型就是观察者模式的一个经典应用。
 
 ### 适配器模式
 
-Spring AOP的增强或通知（Advice）使用到了适配器模式、Spring MVC中也是用到了适配器模式适配Controller。
+&emsp;&emsp;Spring AOP的增强或通知（Advice）使用到了适配器模式、Spring MVC中也是用到了适配器模式适配Controller。
 
 ### 策略模式
 
-Spring中有一个Resource接口，它的不同实现类，会根据不同的策略去访问资源。
+&emsp;&emsp;Spring中有一个Resource接口，它的不同实现类，会根据不同的策略去访问资源。
 
 # IOC
 
@@ -161,7 +161,7 @@ todo
 
 **手写AOP**
 
-todo
+&emsp;&emsp;todo
 
 **JDK动态代理和CGLIB代理**
 
@@ -171,19 +171,19 @@ todo
 
 &emsp;&emsp;Cglib代理创建的动态代理对象性能较高，但消耗的时间也多。所以对于单例对象，无需频繁创建，使用Cglib合适，否则使用JDK代理。 同时，Cglib无法对final方法进行代理，因为它是采用动态创建子类的方式。
 
-**example**  todo
+&emsp;&emsp;**example**  todo
 
 **Spring AOP与AspectJ AOP**
 
-Spring AOP属于**运行时增强**，基于动态代理实现，默认接口使用JDK动态代理，方法使用Cglib动态代理；需要依赖**IOC容器**管理，并且只能作用于Spring容器，java代码实现；性能上，由于基于动态代理，需生成代理实例，在方法调用上也会增加栈的深度，性能不如AspectJ；它主要解决企业级开发中最普遍的AOP（方法织入）。
+&emsp;&emsp;Spring AOP属于**运行时增强**，基于动态代理实现，默认接口使用JDK动态代理，方法使用Cglib动态代理；需要依赖**IOC容器**管理，并且只能作用于Spring容器，java代码实现；性能上，由于基于动态代理，需生成代理实例，在方法调用上也会增加栈的深度，性能不如AspectJ；它主要解决企业级开发中最普遍的AOP（方法织入）。
 
-AspectJ属于**编译时增强**，可以单独使用，也可以整合到其它框架中，需用到单独的编译器ajc；它属于**静态织入**，通过修改代码实现，在运行前就完成了织入，所以生成的类没有额外开销，一般有以下几个织入时机：
+&emsp;&emsp;AspectJ属于**编译时增强**，可以单独使用，也可以整合到其它框架中，需用到单独的编译器ajc；它属于**静态织入**，通过修改代码实现，在运行前就完成了织入，所以生成的类没有额外开销，一般有以下几个织入时机：
 
 - 编译器织入：如类A使用AspectJ添加了一个属性，类B引用了它，这个场景就需要编译器的时候就进行织入，否则无法编译类B。
 - 编译后织入：即生成了.class文件，或已经打成jar包了，这种情况我们需要增强处理，需用此方式。
 - 类加载后织入：即在加载类的时候进行织入，要实现这个时期的织入，有几种常见的方法
 
-具体对比如下图   todo
+&emsp;&emsp;具体对比如下图   todo
 
 # Spring Bean
 
@@ -229,7 +229,7 @@ public class AppConfig{
 
 **Spring Bean的生命周期**
 
-实例化->属性赋值->（前置处理）->初始化->（后置处理）->销毁
+&emsp;&emsp;实例化->属性赋值->（前置处理）->初始化->（后置处理）->销毁
 
 https://www.jianshu.com/p/1dec08d290c1
 
@@ -259,11 +259,11 @@ https://www.jianshu.com/p/1dec08d290c1
 
 **Spring Bean的依赖注入**
 
-构造方法注入
+&emsp;&emsp;构造方法注入
 
-属性注入
+&emsp;&emsp;属性注入
 
-工厂方法注入（静态工厂、非静态工厂）
+&emsp;&emsp;工厂方法注入（静态工厂、非静态工厂）
 
 **自动装配及原理**
 
@@ -285,13 +285,13 @@ https://www.jianshu.com/p/1dec08d290c1
 
 （2）**事务传播特性**
 
-- propagation_requierd：如果当前没有事务，就新建一个事务，如果已存在一个事务中，加入到这个事务中，这是最常见的选择。
-- propagation_supports：支持当前事务，如果没有当前事务，就以非事务方法执行。
-- propagation_mandatory：使用当前事务，如果没有当前事务，就抛出异常。
-- propagation_required_new：新建事务，如果当前存在事务，把当前事务挂起。新建的事务将和被挂起的事务没有任何关系，是两个独立的事务，外层事务失败回滚之后，不能回滚内层事务执行的结果，内层事务失败抛出异常，外层事务捕获，也可以不处理回滚操作。
-- propagation_not_supported：以非事务方式执行操作，如果当前存在事务，就把当前事务挂起。
-- propagation_never：以非事务方式执行操作，如果当前事务存在则抛出异常。
-- propagation_nested：如果当前存在事务，则在嵌套事务内执行。如果当前没有事务，则执行与propagation_required类似的操作。它使用了一个单独的事务，这个事务拥有多个可以回滚的保存点。内部事务的回滚不会对外部事务造成影响。它只对DataSourceTransactionManager事务管理器生效。
+- **propagation_requierd**：如果当前没有事务，就新建一个事务，如果已存在一个事务中，加入到这个事务中，这是最常见的选择。
+- **propagation_supports**：支持当前事务，如果没有当前事务，就以非事务方法执行。
+- **propagation_mandatory**：使用当前事务，如果没有当前事务，就抛出异常。
+- **propagation_required_new**：新建事务，如果当前存在事务，把当前事务挂起。新建的事务将和被挂起的事务没有任何关系，是两个独立的事务，外层事务失败回滚之后，不能回滚内层事务执行的结果，内层事务失败抛出异常，外层事务捕获，也可以不处理回滚操作。
+- **propagation_not_supported**：以非事务方式执行操作，如果当前存在事务，就把当前事务挂起。
+- **propagation_never**：以非事务方式执行操作，如果当前事务存在则抛出异常。
+- **propagation_nested**：如果当前存在事务，则在嵌套事务内执行。如果当前没有事务，则执行与propagation_required类似的操作。它使用了一个单独的事务，这个事务拥有多个可以回滚的保存点。内部事务的回滚不会对外部事务造成影响。它只对DataSourceTransactionManager事务管理器生效。
 
 （3）**事务隔离级别**
 
@@ -318,6 +318,10 @@ https://www.jianshu.com/p/1dec08d290c1
 - read-only：指定事务是否为只读事务，默认为false；为了忽略那些不需要事务的方法，比如读取事务，可以设置read-only为true
 - rollback-for：用于指定能够触发事务回滚的异常类型，如果有多个异常类型需要指定，各类型之间可以通过逗号分隔
 - no-rollback-for：抛出no-rollback-for指定的异常类型，不回滚事务
+
+**声明式事务实现原理**
+
+**声明式事务在哪些情况下会失效**
 
 # Q&A
 
