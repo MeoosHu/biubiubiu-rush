@@ -589,6 +589,10 @@ try (Scanner scanner = new Scanner(new File("test.txt"))) {
 
 ## 
 
+**Q&A**
+
+**Hashmap与ConcurrentHashMap的区别和联系？**
+
 # Java8新特性
 
 

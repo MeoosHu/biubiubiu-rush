@@ -4,7 +4,7 @@
 
 &emsp;&emsp;Spring的6个特征：
 
-- **核心技术**：依赖注入（DI），AOP，事件（events），资源，i18n，验证，数据绑定，类型转换
+- **核心技术**：依赖注入（DI），AOP，事件（events），资源，验证，数据绑定，类型转换
 - **测试**：模拟对象，TestContext框架，Spring MVC测试，WebTestClient
 - **数据访问**：事务，DAO支持，JDBC，ORM，编组XML
 - **Web支持**：Spring MVC和Spring WebFlux Web框架
@@ -71,7 +71,7 @@
 
 ### 代理模式
 
-&emsp;&emsp;Spring AOP功能就是通过代理模式实现的，分为动态代理和静态代理。
+&emsp;&emsp;Spring AOP功能就是通过代理模式实现的，分为动态代理和静态代理。Spring主要是使用JDK动态代理和Cglib代理。
 
 ### 单例模式
 
@@ -83,7 +83,7 @@
 
 ### 观察者模式
 
-&emsp;&emsp;Spring事件驱动模型就是观察者模式的一个经典应用。
+&emsp;&emsp;Spring事件驱动模型。
 
 ### 适配器模式
 
@@ -335,25 +335,38 @@ https://www.jianshu.com/p/1dec08d290c1
 
 # Q&A
 
+**介绍一下Spring，它有哪些特性？它与Spring MVC、Spring Boot、Spring Cloud有何关系？**
 
+**BeanFactory和FactoryBean的区别？**
 
+**BeanFactory 和 ApplicationContext 区别 ?**
 
+**什么是 XMLBeanFactory？**
 
+**@Repository、@Service、@Compent、@Controller它们有什么区别?**
 
+**@Autowired 和 @Resource 有什么区别?**
 
+**什么是IOC？为什么需要控制反转？IOC容器有哪些？**
 
+**DI是什么?**
 
+**AOP是什么？**
 
+**动态代理和静态代理的区别？**
 
+**JDK 动态代理和 CGLIB 代理有什么区别？**
 
+**Spring AOP  和  AspectJ AOP 有什么区别？**
 
+**Bean生命周期?如何进行扩展？**
 
+**Spring如何解决循环依赖？为什么使用三层，二层不行吗？**
 
+**事物隔离级别有哪些？事务的传播机制？**
 
+**Spring支持哪些ORM？**
 
+**如何对Spring进行扩展？**
 
-
-
-
-
-
+**看过Spring哪些源码？**
