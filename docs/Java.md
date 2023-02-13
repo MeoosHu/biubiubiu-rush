@@ -589,6 +589,10 @@ try (Scanner scanner = new Scanner(new File("test.txt"))) {
 
 ## 
 
+ArrayList：初始容量为10，扩容
+
+快速失败、安全失败策略
+
 **Q&A**
 
 **Hashmap与ConcurrentHashMap的区别和联系？**
