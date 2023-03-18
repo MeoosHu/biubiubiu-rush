@@ -583,17 +583,59 @@ try (Scanner scanner = new Scanner(new File("test.txt"))) {
 
 # Java集合
 
+## List
+
+> LinkedList更利于增删更多是体现在平均步长上，不是体现在时间复杂度上，⼆者增删的时间复杂度都是O ( n )  
+
+ArrayList：初始容量为10，扩容1.5     实现了RandomAccess接口，这个接口只是用来标识是否支持随机访问
+
+#序列化？ ArrayList的序列化使用的自定义策略，实际使用了ObjectOutputStream和ObjectInputStream来进行序列化
+
+快速失败：Java.util包下的集合类都是快速失败
+
+安全失败：Java.util.concurrent包下的容器都是安全失败，即遍历拷贝对象，修改在原对象
+
+如何实现线程安全：vector（不推荐），synchronizedList、CopyOnWriteArrayList、自定义同步机制
+
+写时复制：在并发访问的情景下，当需要修改JAVA中Containers的元素时，不直接修改该容器，而是先复制一份副本，在副本上进行修改。修改完成之后，将指向原来容器的引用指向新的容器(副本容器)
+
+## Set
+
+HashSet
+
+## Map
+
+HashMap的数据结构是 数组+链表+红黑树
+
+红黑树：本质上是二叉查找树
+
+- 为什么不用二叉树？红黑树是一种平衡的二叉树，插入、删除、查找的最坏时间复杂度都是O(logn)，避免了二叉树最坏情况下的O(n)时间复杂度
+- 为什么不用平衡二叉树？平衡二叉树是比红黑树更严格的平衡树，为了保持平衡，旋转次数更多，即保持平衡的效率更低，所以平衡二叉树插入、删除的效率比红黑树低
+- 如何保持平衡？旋转（左旋、右旋）和染色
+
+HashMap的数组为什么要取2的整数幂？
+
+有哪些哈希函数的构造方法？直接定址法、数字分析法、平方取中法、折叠法
+
+解决哈希冲突有哪些方法？链地址法、开发定址法、再哈希法、建立公共溢出区
+
+为什么扩容因子是0.75？空间和时间的权衡
+
+如何解决HashMap线程不安全？
+
+- HashTable：synchronized关键字，锁住整个table数组
+- Collections.synchronizedMap：使用Collections集合工具的内部类，通过传入Map封装出一个SynchronizedMap对象，内部定义了一个对象锁，方法内通过对象锁实现
+- ConcurrentHashMap：1.7使用分段锁，1.8使用**CAS+synchronized**     流程图
+
+LinkedHashMap、TreeMap是如何保证有序的？
+
+**自己设计实现一个HashMap**
+
 **HashMap的并发问题以及解决思路？（问题如何产生，能否用别的方法解决并发问题，用当前方法有什么优势，列举出其他集合类的线程并发问题）**
 
 **集合类全景图（数据结构特性、线程安全、实现原理等）**
 
-## 
-
-ArrayList：初始容量为10，扩容
-
-快速失败、安全失败策略
-
-**Q&A**
+## **Q&A**
 
 **Hashmap与ConcurrentHashMap的区别和联系？**
 

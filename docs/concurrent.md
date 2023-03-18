@@ -216,6 +216,12 @@ public ReentrantLock(boolean fair){
 
 ## ThreadLocal类
 
+ThreadLocalMap的数据结构了解吗？
+
+ThreadLocalMap的key为何设计成弱引用？
+
+ThreadLocalMap怎么解决哈希冲突？扩容机制，2倍？
+
 **注意点**
 
 - ThreadLocal 不是用来解决线程安全问题的，多线程不共享，不存在竞争！其目的是使线程能够使用本地变量。
@@ -280,6 +286,28 @@ public ReentrantLock(boolean fair){
 ## LockSupport类
 
 # Q&A
+
+- 进程与线程的区别
+- 线程有哪些常用的调度方法？？ join？
+- 线程状态流程图
+- 线程间的通信方式有哪些？
+- 父子线程如何传输数据？
+- 原子性、可见性、有序性如何保证？
+- 介绍一下指令重排？双重单检锁？
+- happens-before？as-if-serial？
+- volatile如何保证可见性和有序性？内存屏障？
+- synchronized实现原理
+- CAS原理及导致的问题
+- 死锁，必要条件，如何排查
+- 线程池执行逻辑，核心参数，关闭
+- 线程池异常处理
+- 如何设计实现一个线程池
+
+
+
+
+
+
 
 1. 介绍一下线程安全？为什么会有线程安全问题？
 

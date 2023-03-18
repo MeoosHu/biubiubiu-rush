@@ -486,6 +486,8 @@ HotSpot VM 的自动内存管理系统要求对象的大小必须是 8 字节的
 - **空闲列表**
   如果 Java **堆中内存并不规整**，已使用的内存和空闲内存交错（说明采用的是**标记-清除法**，有碎片），此时没法简单进行指针碰撞， VM 必须维护一个列表，记录其中哪些内存块空闲可用。分配之时从空闲列表中找到一块足够大的内存空间划分给对象实例。这种方式称为“**空闲列表**”。
 
+这两种方式的选择由Java堆是否规整决定，而Java堆是否规整由选择的垃圾收集器是否具有压缩整理能力决定
+
 ### 初始化
 
 分配完内存后，为对象中的成员变量赋上初始值，设置对象头信息，调用对象的构造函数方法进行初始化。
@@ -1092,8 +1094,8 @@ async-profiler：Java应用性能分析工具，开源、火焰图、跨平台
 
 **堆配置**
 
-- -Xms ：初始堆⼤⼩
-- -Xmx：最⼤堆⼤⼩
+- -Xms ：设置堆内存最小值
+- -Xmx：设置堆内存最大值
 - XX:NewSize=n:设置年轻代⼤⼩
 - XX:NewRatio=n :设置年轻代和年⽼代的⽐值。如：为 3 表⽰年轻代和年⽼代⽐值为1：3，年轻代占整个年轻代年⽼代和的1/4
 - XX:SurvivorRatio=n :年轻代中Eden区与两个 Survivor区的⽐值。注意Survivor区有两个。如3表⽰Eden：3 Survivor：2，⼀个Survivor区占整个年轻代的1/5
@@ -1101,27 +1103,42 @@ async-profiler：Java应用性能分析工具，开源、火焰图、跨平台
 
 **收集器配置**
 
-- \- X X : + U s e S e r i a l G C :设置串⾏收集器
-  \- X X : + U s e P a r a l l e l G C :设置并⾏收集器
-  \- X X : + U s e P a r a l l e d l O l d G C :设置并⾏年⽼代收集器
-  \- X X : + U s e C o n c M a r k S w e e p G C :设置并发收集器
+- \- XX:+UseSerialGC :设置串⾏收集器
+  \- XX: UseParallelGC:设置并⾏收集器
+  \- XX:+UseParalledlOldGC:设置并⾏年⽼代收集器
+  \- XX:+UseConcMarkSweepGC :设置并发收集器
 
 **并⾏收集器设置**
 
-- \- X X : P a r a l l e l G C T h r e a d s = n :设置并⾏收集器收集时使⽤的 C P U 数。并⾏收集线程数
-- \- X X : M a x G C P a u s e M i l l i s = n :设置并⾏收集最⼤的暂停时间（如果到这个时间了，垃圾回收器依然
+- \- XX:ParallelGCThreads=n:设置并⾏收集器收集时使⽤的 C P U 数。并⾏收集线程数
+- \- XX:MaxGCPauseMillis=n:设置并⾏收集最⼤的暂停时间（如果到这个时间了，垃圾回收器依然
 - 没有回收完，也会停⽌回收）
-- \- X X : G C Ti m e R a t i o = n :设置垃圾回收时间占程序运⾏时间的百分⽐。公式为：1 / ( 1 + n )
-- \- X X : + C M S I n c r e m e n t a l M o d e :设置为增量模式。适⽤于单 C P U 情况
-- \- X X : P a r a l l e l G C T h r e a d s = n :设置并发收集器年轻代⼿机⽅式为并⾏收集时，使⽤的 C P U 数。并
+- \- XX:GCTimeRatio=n:设置垃圾回收时间占程序运⾏时间的百分⽐。公式为：1 / ( 1 + n )
+- \- XX:+CMSIncrementalMode:设置为增量模式。适⽤于单 C P U 情况
+- \- XX:ParallelGCThreads=n:设置并发收集器年轻代⼿机⽅式为并⾏收集时，使⽤的 C P U 数。并
 - ⾏收集线程数
 
 **打印 G C 回收的过程⽇志信息**
 
-- \- X X : + P r i n t G C
-- \- X X : + P r i n t G C D e t a i l s
-- \- X X : + P r i n t G C Ti m e S t a m p s
-- \- X l o g g c : f i l e n a m e  
+- \- XX:+PrintGC
+- \- XX:+PrintGCDetails
+- \- XX:+PrintGCTimeStamps
+- \- Xloggc:filename  
 
 # Q&A
 
+JVM内存区域图
+
+JDK1.6、1.7、1.8内存区域的变化
+
+对象的创建过程
+
+JVM里new 对象时，堆会发生抢占吗？如何保证线程安全？
+
+对象的内存布局？
+
+内存泄漏可能由哪些原因导致？
+
+GC Roots的对象有哪几种？
+
+强引用、软引用、弱引用、虚引用、
