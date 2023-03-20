@@ -47,6 +47,8 @@
 
 &emsp;&emsp;@Bean的加载过程是怎么样的？
 
+​		@Bean的应用场景有哪些？
+
 **@Service与@Repository**
 
 **@Autowired与@Qualifer**
@@ -133,6 +135,10 @@ todo
 
 ## 循环依赖
 
+只有单例的Bean才存在循环依赖的情况。     **++++**
+
+不支持构造器注入引起的循环依赖
+
 # AOP
 
 &emsp;&emsp;AOP（Aspect-Oriented Programming：面向切面编程）主要解决一些系统层面上的问题，如日志，事务，权限等，即将那些与业务无关，却为业务模块所共同调用的逻辑和责任封装起来，便于减少系统的重复代码，降低模块之间的耦合度，提高了可操作性和可维护性。
@@ -161,9 +167,9 @@ todo
 
 **手写AOP**
 
-&emsp;&emsp;todo
+&emsp;应用
 
-**JDK动态代理和CGLIB代理**
+## 动态代理
 
 &emsp;&emsp;**JDK动态代理**：一般通过实现**invocationHandler**接口，定义横切逻辑，再通过反射机制（invoke）调用目标类的代码，在此过程，可能包装luo'ji，对目标方法进行前置后置处理；**Proxy**利用**invocationHandler**动态创建一个符合目标类实现的接口实例，生成目标类的代理对象。
 
@@ -173,7 +179,7 @@ todo
 
 &emsp;&emsp;**example**  todo
 
-**Spring AOP与AspectJ AOP**
+## **Spring AOP与AspectJ AOP**
 
 &emsp;&emsp;Spring AOP属于**运行时增强**，基于动态代理实现，默认接口使用JDK动态代理，方法使用Cglib动态代理；需要依赖**IOC容器**管理，并且只能作用于Spring容器，java代码实现；性能上，由于基于动态代理，需生成代理实例，在方法调用上也会增加栈的深度，性能不如AspectJ；它主要解决企业级开发中最普遍的AOP（方法织入）。
 
@@ -205,7 +211,7 @@ todo
 
 1. 将Bean定义为多例，但这样容器不好管理
 2. 在Bean对象中尽量笔迷那定义可变的成员变量（不现实）
-3. 在类中定义一个ThreadLocal成员变量，将需要的可变成员变量保存在ThreadLocal中（推荐）
+3. 在类中定义一个**ThreadLocal**成员变量，将需要的可变成员变量保存在ThreadLocal中（推荐）
 
 **@Component和@Bean的区别**
 
@@ -263,7 +269,7 @@ https://www.jianshu.com/p/1dec08d290c1
 
 &emsp;&emsp;属性注入
 
-&emsp;&emsp;工厂方法注入（静态工厂、非静态工厂）
+&emsp;&emsp;工厂方法注入（静态工厂、非静态工厂）   **实例测试**
 
 **自动装配及原理**
 
@@ -276,14 +282,14 @@ https://www.jianshu.com/p/1dec08d290c1
 
 &emsp;&emsp;Spring事务分为编程式事务（硬编码，不推荐）和声明式事务（配置文件配置，推荐），声明式事务可用XML或注解进行配置
 
-&emsp;&emsp;**事务的特性**
+## 事务的特性
 
 - **原子性（Atomicity）**：事务是一个原子操作，由一系列动作组成。事务的原子性确保动作要么全部完成，要么完全不起作用。
 - **一致性（Consistency）：**一旦事务完成（不管成功还是失败），系统必须确保它所建模的业务处于一致的状态，而不会是部分完成部分失败。在现实中的数据不应该被破坏。
 - **隔离性（Isolation）**：可能有许多事务会同时处理相同的数据，因此每个事务都应该与其他事务隔离开来，防止数据损坏。
 - **持久性（Durability）**：一旦事务完成，无论发生什么系统错误，它的结果都不应该受到影响，这样就能从任何系统崩溃中恢复过来。通常情况下，事务的结果被写到持久化存储器中。
 
-&emsp;&emsp;**事务传播特性**
+## 事务传播特性
 
 - **propagation_requierd**：如果当前没有事务，就新建一个事务，如果已存在一个事务中，加入到这个事务中，这是最常见的选择。
 - **propagation_supports**：支持当前事务，如果没有当前事务，就以非事务方法执行。
@@ -293,7 +299,15 @@ https://www.jianshu.com/p/1dec08d290c1
 - **propagation_never**：以非事务方式执行操作，如果当前事务存在则抛出异常。
 - **propagation_nested**：如果当前存在事务，则在嵌套事务内执行。如果当前没有事务，则执行与propagation_required类似的操作。它使用了一个单独的事务，这个事务拥有多个可以回滚的保存点。内部事务的回滚不会对外部事务造成影响。它只对DataSourceTransactionManager事务管理器生效。
 
-&emsp;&emsp;**事务隔离级别**
+事务传播机制是用ThreadLocal实现的，所以，如果调用的方法是在新线程中，则其实是不会生效的
+
+
+
+todo   实例验证
+
+
+
+## 事务隔离级别
 
 ​		TransactionDefinition接口中定义了5个表示隔离级别的常量：
 
@@ -319,7 +333,7 @@ https://www.jianshu.com/p/1dec08d290c1
 - rollback-for：用于指定能够触发事务回滚的异常类型，如果有多个异常类型需要指定，各类型之间可以通过逗号分隔
 - no-rollback-for：抛出no-rollback-for指定的异常类型，不回滚事务
 
-&emsp;&emsp;**声明式事务实现原理**
+## 声明式事务实现原理
 
 &emsp;&emsp;即通过AOP/动态代理。
 
@@ -335,38 +349,65 @@ https://www.jianshu.com/p/1dec08d290c1
 
 # Q&A
 
-**介绍一下Spring，它有哪些特性？它与Spring MVC、Spring Boot、Spring Cloud有何关系？**
+- 介绍一下Spring，它有哪些特性？它与Spring MVC、Spring Boot、Spring Cloud有何关系？
 
-**BeanFactory和FactoryBean的区别？**
 
-**BeanFactory 和 ApplicationContext 区别 ?**
+- BeanFactory和FactoryBean的区别？
 
-**什么是 XMLBeanFactory？**
 
-**@Repository、@Service、@Compent、@Controller它们有什么区别?**
+- BeanFactory 和 ApplicationContext 区别 ?
 
-**@Autowired 和 @Resource 有什么区别?**
+​		BeanFactory：Spring框架的基础设施，面向Spring本身；是类的通用工厂，可以创建并管理各种类的对象
 
-**什么是IOC？为什么需要控制反转？IOC容器有哪些？**
+​		ApplicationContext：建立在BeanFactory基础上，面向使用Spring的开发者；
 
-**DI是什么?**
+- 什么是 XMLBeanFactory？
 
-**AOP是什么？**
 
-**动态代理和静态代理的区别？**
+- @Repository、@Service、@Compent、@Controller它们有什么区别?
 
-**JDK 动态代理和 CGLIB 代理有什么区别？**
 
-**Spring AOP  和  AspectJ AOP 有什么区别？**
+- @Autowired 和 @Resource 有什么区别?
 
-**Bean生命周期?如何进行扩展？**
 
-**Spring如何解决循环依赖？为什么使用三层，二层不行吗？**
+- 什么是IOC？为什么需要控制反转？IOC容器有哪些？
 
-**事物隔离级别有哪些？事务的传播机制？**
 
-**Spring支持哪些ORM？**
+- DI是什么?
 
-**如何对Spring进行扩展？**
 
-**看过Spring哪些源码？**
+- AOP是什么？
+
+
+- 动态代理和静态代理的区别？
+
+
+- JDK 动态代理和 CGLIB 代理有什么区别？
+
+
+- Spring AOP  和  AspectJ AOP 有什么区别？
+
+- Bean生命周期?如何进行扩展？
+
+
+- Spring如何解决循环依赖？为什么使用三层，二层不行吗？
+
+- 事物隔离级别有哪些？事务的传播机制？
+
+
+- Spring支持哪些ORM？
+
+
+- 如何对Spring进行扩展？
+
+
+- 看过Spring哪些源码？
+
+
+
+- 如何设计一个Spring IOC？
+- Spring中单例Bean的线程安全如何保证？ThreadLocal的应用场景？
+
+
+
+**事务**
